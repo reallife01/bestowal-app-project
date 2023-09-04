@@ -1,0 +1,211 @@
+.containerForm{
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+}
+
+.rowHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.h3Container{
+    font-size: 20px;
+    font-weight: 600 ;
+    margin-left: 12rem;
+    font-style: italic;
+}
+
+.h1Container{
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.h1Container .big {
+    color: #FF4820;
+}
+
+.hr{
+    height: 5px;
+    width: 350px;
+    border-radius: 50%;
+    font-size: 30px;
+    background:#FF4820;
+    margin-left: 4.7rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.formRow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.imageDiv .imageContainer{
+    width: 370px;
+    margin-left: 6.2rem;
+    margin-top: 2.5rem;
+}
+
+.formColumn{
+    margin-right: 10.2rem;
+}
+
+.nameForm {
+    display: grid;
+    margin-bottom: 0.8rem;
+}
+
+.emailForm{
+    display: grid;
+    margin-bottom: 0.8rem;
+}
+
+.msgForm{
+    display: grid;
+    margin-bottom: 0.8rem;
+}
+
+.form-label{
+    margin-bottom: 0.5rem;
+}
+
+.form-control{
+    width: 500px;
+    color: black;
+}
+
+
+
+
+.formColumn .btnForm{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    /* padding-bottom: 3px; */
+    margin-bottom: 1.2rem;
+    color: white;
+    background-color:#FF4820;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+
+
+@media screen and (max-width: 1204px){
+    .h3Container{
+        font-size: 10px ;
+        margin-left: 9rem;
+    }
+
+    .h1Container{
+        font-size: 20px;
+    }
+
+    .hr{
+        width: 200px;
+    }
+
+    .imageDiv .imageContainer{
+        width: 250px;
+        margin-left: 4rem;
+    }
+
+    .formRow{
+        display: grid;
+        margin-left: 10rem;
+    }
+
+    .form-control{
+        width: 300px;
+        color: black;
+    }
+
+    .formColumn{
+        margin-left: 2.4rem;
+        margin-top: 2rem;
+    }    
+}
+
+
+
+@media screen and (max-width: 1204px){
+    .imageDiv .imageContainer{
+        margin-left: 14rem;
+    }
+
+    .formColumn{
+        margin-left: 13rem;
+
+    }
+
+}
+
+
+@media screen and (max-width: 912px){
+    .imageDiv .imageContainer{
+        margin-left: 9.7rem;
+    }
+
+    .formColumn{
+        margin-left: 9rem;
+
+    }
+
+}
+
+
+@media screen and (max-width: 768px){
+    .imageDiv .imageContainer{
+        margin-left: 7rem;
+    }
+
+    .formColumn{
+        margin-left: 5rem;
+
+    }
+
+}
+@media screen and (max-width: 414px){
+    .imageDiv .imageContainer{
+        margin-left: -5rem;
+    }
+
+    .formColumn{
+        margin-left: -6rem;
+    }
+
+}
+
+
+@media screen and (max-width: 280px){
+    .imageDiv .imageContainer{
+        margin-left: -8rem;
+    }
+
+    .formColumn{
+        margin-left: -3rem;
+    }
+
+    .h1Container{
+        font-size: 15px;
+        margin-left: 3.9rem;
+    }
+
+    .hr{
+        margin-right: 5rem;
+    }
+
+}
+
