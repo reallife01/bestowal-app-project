@@ -12,6 +12,7 @@ const CreateProject = () => {
   const [date, setDate] = useState('')
   const [imageURL, setImageURL] = useState('')
 
+
   const toTimestamp = (dateStr) => {
     const dateObj = Date.parse(dateStr)
     return dateObj / 1000
@@ -111,7 +112,7 @@ const CreateProject = () => {
               step={0.01}
               min={0.01}
               name="cost"
-              placeholder="cost"
+              placeholder="cost (ETH)"
               onChange={(e) => setCost(e.target.value)}
               value={cost}
               required
@@ -162,7 +163,7 @@ const CreateProject = () => {
             focus:ring-0"
               type="text"
               name="description"
-              placeholder="Description"
+              placeholder="Description you can add your (email it optional)"
               onChange={(e) => setDescription(e.target.value)}
               value={description}
               required

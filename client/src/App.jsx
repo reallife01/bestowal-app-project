@@ -13,6 +13,8 @@ import Project from './views/Project';
 import { isWallectConnected } from './services/blockchain';
 import { ToastContainer } from 'react-toastify';
 import PreLoader from "./components/Preloader";
+import CreateProjectAccount from './components/CreateProjectAccount';
+import ProjectAccount from "./components/ProjectAccount";
 
 
 
@@ -49,6 +51,8 @@ const App = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/dashboard" element={<Dashboard />} className="min-h-screen relative"/>
         <Route path="/projects/:id" element={<Project />} className="min-h-screen relative" />
+        <Route path="/createProjectAccount" element={<CreateProjectAccount />} className="min-h-screen relative"/>
+        <Route path="/projectAccount" element={<ProjectAccount />} className="min-h-screen relative"/>
       </Routes>
       ) : null}
     <ToastContainer

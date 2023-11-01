@@ -183,29 +183,18 @@ const payoutProject = async (id) => {
   }
 }
 
-// const structuredBackers = (backers) =>
-//   backers
-//     .map((backer) => ({
-//       owner: backer.owner.toLowerCase(),
-//       refunded: backer.refunded,
-//       timestamp: new Date(backer.timestamp.toNumber() * 1000).toJSON(),
-//       contribution: parseInt(backer.contribution._hex) / 10 ** 18,
-//     }))
-//     .reverse()
-
-const structuredBackers = (backers) => {
-  return backers
+const structuredBackers = (backers) =>
+  backers
     .map((backer) => ({
       owner: backer.owner.toLowerCase(),
       refunded: backer.refunded,
       timestamp: new Date(backer.timestamp.toNumber() * 1000).toJSON(),
       contribution: parseInt(backer.contribution._hex) / 10 ** 18,
     }))
-    .reverse();
-};
+    .reverse()
 
-const structuredProjects = (projects) => {
-  return projects
+const structuredProjects = (projects) =>
+  projects
     .map((project) => ({
       id: project.id.toNumber(),
       owner: project.owner.toLowerCase(),
@@ -220,23 +209,22 @@ const structuredProjects = (projects) => {
       backers: project.backers.toNumber(),
       status: project.status,
     }))
-    .reverse();
-};
+    .reverse()
 
 const toDate = (timestamp) => {
-  const date = new Date(timestamp);
-  const dd = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+  const date = new Date(timestamp)
+  const dd = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
   const mm =
-    date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
-  const yyyy = date.getFullYear();
-  return `${yyyy}-${mm}-${dd}`;
-};
+    date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+  const yyyy = date.getFullYear()
+  return `${yyyy}-${mm}-${dd}`
+}
 
 const structureStats = (stats) => ({
   totalProjects: stats.totalProjects.toNumber(),
   totalBacking: stats.totalBacking.toNumber(),
   totalDonations: parseInt(stats.totalDonations._hex) / 10 ** 18,
-});
+})
 
 const reportError = (error) => {
   console.log(error.message)

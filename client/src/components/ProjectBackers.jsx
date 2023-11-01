@@ -55,7 +55,7 @@ const ProjectBackers = ({ backers }) => {
 }
 
 const Backer = ({ backer }) => (
-  <tr className="border-b border-gray-200">
+  <tr className="text-white border-b border-gray-200">
     <td
       className="text-sm font-light
       px-6 py-4 whitespace-nowrap"
@@ -73,9 +73,9 @@ const Backer = ({ backer }) => (
       className="text-sm font-light
                   px-6 py-4 whitespace-nowrap"
     >
-      <small className="flex justify-start items-center space-x-1">
+      <small className=" text-orange-500 flex justify-start items-center space-x-1">
         <FaEthereum />
-        <span className="text-gray-700 font-medium">
+        <span className="text-orange-700 font-medium">
           {backer.contribution} ETH
         </span>
       </small>

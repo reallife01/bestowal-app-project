@@ -1,5 +1,6 @@
 import { setGlobalState, useGlobalState } from '../store';
 import './main.css';
+// import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [stats] = useGlobalState('stats')
@@ -15,7 +16,7 @@ const Hero = () => {
         <span className="gradient__text uppercase text-600">Bestowal.</span>
       </h1>
       <div className="flex justify-center items-center space-x-2">
-        <button
+        {/* <Link to={'/createProjectAccount'}><button
           type="button"
           className="inline-block px-7 py-3 mr-2 bg-orange-600
         text-white font-medium text-xs leading-snug uppercase shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 rounded-full active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -23,7 +24,7 @@ const Hero = () => {
         data-mdb-ripple-color="light"
         >
           Add Project with bank account..
-        </button>
+        </button></Link> */}
         <button
           type="button"
           className="inline-block px-7 py-3 mr-2 bg-orange-600

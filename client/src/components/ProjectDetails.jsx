@@ -70,9 +70,8 @@ const ProjectDetails = ({ project }) => {
                 )}
               </div>
             </div>
-
             <div>
-              <p className="text-sm font-light mt-2">{project?.description}</p>
+              <p className="text-orange-700 font-light mt-2">{project?.description}</p>
               <div className="w-full overflow-hidden bg-gray-300 mt-4">
                 <div
                   className="bg-blue-600 text-xs font-medium

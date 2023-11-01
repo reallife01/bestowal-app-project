@@ -1,0 +1,19 @@
+#codes to run terminal
+ 
+#step 1.  npm run dev for the backend
+#step 2.  npm run start for the frontend
+#step 3.  yarn hardhat node
+#step 4.  yarn hardhat run scripts/deploy.js
+
+
+
+This demo uses:
+
+- Metamask
+- Hardhat
+- Infuria
+- ReactJs
+- Tailwind CSS
+- Solidity
+- EthersJs
+- Faucet
