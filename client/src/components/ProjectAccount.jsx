@@ -1,180 +1,110 @@
-// import React, { useState, useEffect } from "react";
-// import ProjectCardAccount from "./ProjectCardAccount";
-// import "./main.css";
+import React from "react";
+import details from "./details";
 
-// const ProjectAccount = ({ projectNew }) => {
-//     // Define an initial state object with empty values for the total projects, total backing, and total donations
-//     const initialState = {
-//         totalProjects: undefined,
-//         totalBacking: undefined,
-//         totalDonations: undefined,
-//       };
-
-//     // Use the useState hook to create a state variable and a setter function for the data
-//     const [data, setData] = useState(initialState);
-
-//     // Define a function that gets the total projects, total backing, and total donations from the API
-//     const getDashboardData = async ({}) => {
-//         try {
-//           const response = await fetch("/get-dashboard-data");
-//           const data = await response.json();
-    
-//           setData({
-//             totalProjects: data.totalProjects,
-//             totalBacking: data.totalBacking,
-//             totalDonations: data.totalDonations,
-//           });
-//         } catch (error) {
-//           // Handle the API error
-//           console.error("Failed to get dashboard data:", error);
-//         }
-//       };
-
-//     // Get the dashboard data when the component mounts
-//     useEffect(() => {
-//         getDashboardData();
-//     }, []);
-
-import React, { useState, useEffect } from "react";
-import ProjectCardAccount from "./ProjectCardAccount";
-import "./main.css";
-
-const ProjectAccount = ({ projectNew }) => {
-  // Define an initial state object with empty values for the total projects, total backing, and total donations
-  const initialState = {
-    totalProjects: undefined,
-    totalBacking: undefined,
-    totalDonations: undefined,
+const ProjectCardAccount = () => {
+  const handleWhatsAppPay = () => {
+    const stripeLink = "https://buy.stripe.com/test_14k8zE9C60G9al24gg";
+    const message = `Hey, I want to make a payment. Here's the link: ${stripeLink}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
+    window.open(whatsappLink);
   };
 
-  // Use the useState hook to create a state variable and a setter function for the data
-  const [data, setData] = useState(initialState);
-
-  // Define a function that gets the total projects, total backing, and total donations from the API
-  const getDashboardData = async () => {
-    try {
-      const response = await fetch("/get-dashboard-data");
-      const data = await response.json();
-
-      setData(data); // Set the entire data object from the API response
-    } catch (error) {
-      // Handle the API error
-      console.error("Failed to get dashboard data:", error);
-    }
-  };
-
-    // Get the dashboard data when the component mounts
-  useEffect(() => {
-    getDashboardData();
-  }, []);
-
-    return (
-        <div>
-            <div className=" text-purple-600 flex justify-center items-center my-10">
-                <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-                    <span
-                        className="text-lg font-bold text-orange-900
-leading-5"
-                    >
-                        {data?.totalProjects || 0}
-                    </span>
-                    <span>Projects</span>
-                </div>
-                <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-                    <span
-                        className="text-lg font-bold text-orange-900
-leading-5"
-                    >
-                        {data?.totalBacking || 0}
-                    </span>
-                    <span>Backings</span>
-                </div>
-                <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-                    <span
-                        className="text-lg font-bold text-orange-900
-leading-5"
-                    >
-                        {data?.totalDonations || 0}
-                    </span>
-                    <span>Donated</span>
-                </div>
+  return (
+      <div className="mb-5 grid grid-cols-4 gap-4 justify-center">
+        {details.map((item) => (
+          <div className=" bg-gray-700 gap-3 flex  basis-1/2 justify-start border-4 items-start
+        sm:space-x-3 flex-wrap" key={item.key}>
+            <img
+              src={item.src}
+              alt={item.alt}
+              className="rounded-xl h-64 w-full object-cover"
+            />
+            <h5>{item.heading}</h5>
+            <h5>{item.personName}</h5>
+            <h5>{item.fundDetails}</h5>
+            <div className="flex justify-between py-3 px-3">
+              <button onClick={handleWhatsAppPay}>Share</button>
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "https://buy.stripe.com/test_14k8zE9C60G9al24gg")
+                }
+              >
+                Donate
+              </button>
             </div>
-            <ProjectCardAccount {...projectNew}/>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+  );
 };
 
-export default ProjectAccount;
+export default ProjectCardAccount;
 
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
 
 
+// const ProjectCardAccount = () => {
+//   const [projectData, setProjectData] = useState(null);
 
-// import React, { useState, useEffect } from "react";
-// import ProjectCardAccount from "./ProjectCardAccount";
-// import "./main.css";
-
-// const ProjectAccount = ({ projectNew }) => {
-//   // Define an initial state object with empty values for the total projects, total backing, and total donations
-//   const initialState = {
-//     totalProjects: undefined,
-//     totalBacking: undefined,
-//     totalDonations: undefined,
-//   };
-
-//   // Use the useState hook to create a state variable and a setter function for the data
-//   const [data, setData] = useState(initialState);
-
-//   // Define a function that gets the total projects, total backing, and total donations from the API
-//   const getDashboardData = async () => {
+//   const fetchProjectData = async () => {
 //     try {
-//       const response = await fetch("/get-dashboard-data");
-//       const data = await response.json();
-
-//       setData(data); // Set the entire data object from the API response
+//       const response = await axios.get('/api/projectAccount'); // Correct endpoint
+//       setProjectData(response.data);
 //     } catch (error) {
-//       // Handle the API error
-//       console.error("Failed to get dashboard data:", error);
+//       console.error('Error fetching project data:', error);
+//       // Handle errors as needed
 //     }
 //   };
+//   fetchProjectData()
+  
 
-//   // Get the dashboard data when the component mounts
-//   useEffect(() => {
-//     getDashboardData();
-//   }, []);
+//   const handleWhatsAppPay = () => {
+//     const stripeLink = "https://buy.stripe.com/test_14k8zE9C60G9al24gg";
+//     const message = `Hey, I want to make a payment. Here's the link: ${stripeLink}`;
+//     const encodedMessage = encodeURIComponent(message);
+//     const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
+//     window.open(whatsappLink);
+//   };
 
 //   return (
-//     <div>
-//       <div className=" text-purple-600 flex justify-center items-center my-10">
-//         {data.totalProjects !== undefined && (
-//           <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-//             <span className="text-lg font-bold text-orange-900 leading-5">
-//               {data.totalProjects || 0}
-//             </span>
-//             <span>Projects</span>
+//       <div className="mb-5 grid grid-cols-4 gap-4 justify-center">
+//         {projectData ? (
+//           <div className=" bg-gray-700 gap-3 flex  basis-1/2 justify-start border-4 items-start
+//         sm:space-x-3 flex-wrap">
+//             <img
+//               src={projectData.image}
+//               alt={projectData.image}
+//               className="rounded-xl h-64 w-full object-cover"
+//             />
+//             <h5>{projectData.username}</h5>
+//             <h5>{projectData.state}</h5>
+//             <h5>{projectData.estimatedAmount}</h5>
+//             <div className="flex justify-between py-3 px-3">
+//               <button onClick={handleWhatsAppPay}>Share</button>
+//               <button
+//                 onClick={() =>
+//                   (window.location.href =
+//                     "https://buy.stripe.com/test_14k8zE9C60G9al24gg")
+//                 }
+//               >
+//                 Donate
+//               </button>
+//             </div>
 //           </div>
-//         )}
-//         {data.totalBacking !== undefined && (
-//           <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-//             <span className="text-lg font-bold text-orange-900 leading-5">
-//               {data.totalBacking || 0}
-//             </span>
-//             <span>Backings</span>
+//           ):(
+//           <div>
+//             <p>Loading ....</p>
 //           </div>
-//         )}
-//         {data.totalDonations !== undefined && (
-//           <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full">
-//             <span className="text-lg font-bold text-orange-900 leading-5">
-//               {data.totalDonations || 0}
-//             </span>
-//             <span>Donated</span>
-//           </div>
-//         )}
+//           )}
 //       </div>
-//       <ProjectCardAccount {...projectNew} />
-//     </div>
 //   );
 // };
 
-// export default ProjectAccount;
+// export default ProjectCardAccount;
+
+
 
