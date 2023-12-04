@@ -1,6 +1,4 @@
 import React from "react";
-import "./styles.css";
-import "./responsive.css";
 import { Link } from 'react-router-dom';
 
 function StartProject(){
