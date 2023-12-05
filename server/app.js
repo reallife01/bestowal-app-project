@@ -107,10 +107,16 @@ app.post("/api/fundraisers", async (req, res) => {
 });
 
 // API endpoint to fetch project data
-app.get('/api/projects', (req, res) => {
-  // Your logic to fetch and send project data
-  res.json({ projectData: 'your project data' });
+// Example in your server.js or wherever you define routes
+app.get('/getForms', async (req, res) => {
+  // Your logic to fetch forms from MongoDB
+  await Form.find()
+  .then(forms => res.json(forms) )
+  .catch(err => res.json(err))
 });
+
+  
+
 
 
 
