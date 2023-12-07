@@ -5,6 +5,9 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+const stripe = require("stripe")("sk_test_51O0BmWGBndscvsiapPtXwLzG3x7wkXbhe0AKlFe5fgphi80pZqF22qUqulvXrDjwXoBOi7o16RE3S3BHJpHLIPGV00PGcAvupv");
+const {v4: uuidv4}= require("uuid");
+
 
 const app = express();
 
@@ -87,6 +90,43 @@ app.post('/api/donateEase', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'An error occurred' });
   }
+});
+
+app.post("/checkout", (req, res) => {
+  const { number, token } = req.body;
+  console.log("AMOUNT ", number);
+
+  const idempontencyKey = uuidv4();
+
+  
+ stripe.checkout.sessions.create({
+    success_url: 'http://localhost:3000/success',
+    cancel_url: 'https://localhost:3000/cancel',
+    payment_method_types: ['card'],
+    mode:'payment',
+  
+  })
+
+  return stripe.customers
+    .create({
+      email: token.email,
+      source: token.id
+    })
+    .then(customer => {
+      stripe.charges.create(
+        {
+          amount: number * 100,
+          currency: "usd",
+          customer: customer.id,
+          receipt_email: token.email,
+          
+        },
+        { idempontencyKey }
+      );
+    })
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log(err));
+    
 });
 
 app.post("/api/fundraisers", async (req, res) => {

@@ -65,9 +65,9 @@ const ProjectCardAccount = () => {
   };
 
   return (
-    <div className="mb-5 grid grid-cols-4 gap-4 justify-center">
+    <div className="my-5 grid grid-cols-4 gap-4 justify-center">
       {forms.map(form => (
-        <div key={form._id} className="bg-gray-700 gap-3 flex basis-1/2 justify-start border-4 items-start sm:space-x-3 flex-wrap">
+        <div key={form._id} className="bg-gray-700 gap-3 flex basis-1/2 justify-start border-2 items-start sm:space-x-3 flex-wrap">
           <img
             src={form.image}
             alt={form.image}  // Fix: Access form.image instead of projectData.image
