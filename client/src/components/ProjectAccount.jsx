@@ -45,6 +45,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const ProjectCardAccount = () => {
   const [forms, setForms] = useState([]);
@@ -78,11 +79,9 @@ const ProjectCardAccount = () => {
           <h5>{form.estimatedAmount}</h5>
           <div className="flex justify-between py-3 px-3">
             <button onClick={handleWhatsAppPay}>Share</button>
-            <button
-              onClick={() => window.location.href = "https://buy.stripe.com/test_14k8zE9C60G9al24gg"}
-            >
+            <Link to={"/checkout"}><button>
               Donate
-            </button>
+            </button></Link>
           </div>
         </div>
       ))}

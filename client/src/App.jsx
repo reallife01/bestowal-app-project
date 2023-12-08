@@ -17,7 +17,7 @@ import CreateProjectAccount from './components/CreateProjectAccount';
 import ProjectAccount from "./components/ProjectAccount";
 import Success from "./components/Success";
 import Cancel from "./components/Cancel";
-import Checkout from "./components/Checkout";
+import MyButton from "./components/Checkout";
 
 
 
@@ -57,9 +57,9 @@ const App = () => {
         <Route path="/projects/:id" element={<Project />} className="min-h-screen relative" />
         <Route path="/createProjectAccount" element={<CreateProjectAccount />} className="min-h-screen relative"/>
         <Route path="/projectAccount" element={<ProjectAccount />} className="min-h-screen relative"/>
-        <Route path="/projectAccount" element={<Checkout />} className="min-h-screen relative"/>
-        <Route path="/projectAccount" element={<Success />} className="min-h-screen relative"/>
-        <Route path="/projectAccount" element={<Cancel />} className="min-h-screen relative"/>
+        <Route path="/checkout" element={<MyButton />} className="min-h-screen relative"/>
+        <Route path="/success" element={<Success />} className="min-h-screen relative"/>
+        <Route path="/cancel" element={<Cancel />} className="min-h-screen relative"/>
       </Routes>
       ) : null}
     <ToastContainer
