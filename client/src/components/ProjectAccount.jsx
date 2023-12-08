@@ -81,13 +81,13 @@ const ProjectAccount = () => {
             <h5 className='mt-2 text-2xl italic font-semibold'>
               <span className='text-pink-500'>Name:</span> {form.username}
             </h5>
-            <h5 className='mt-2 font-thin text-sm'>
+            <p className='mt-2 font-thin text-sm'>
               <span className="text-pink-500">description:</span> {form.cause}
-            </h5>
+            </p>
             <h5 className="text-pink-500 mt-2">
-              <span className="text-xl font-medium">cost</span>: 
-              <span className='text-gray-700'>$</span>
-              <span className='text-green-400'>{form.estimatedAmount}.00</span>
+              <span className="text-xl font-medium">total estimated</span>: 
+              <span className='text-gray-700'> $</span>
+              <span className='text-green-400'> {form.estimatedAmount}</span>
               </h5>
             <small className="text-gray-500 mt-1">
               {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}

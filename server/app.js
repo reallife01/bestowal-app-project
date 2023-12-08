@@ -55,6 +55,7 @@ const formSchema = new mongoose.Schema({
   state: String,
   nationality: String,
   cause: String,
+  tittle: String,
   isPrivate: Boolean,
   isPublic: Boolean,
   whatsappNumber: Number,
@@ -80,6 +81,7 @@ app.post('/api/donateEase', async (req, res) => {
     form.state = req.body.state;
     form.nationality = req.body.nationality;
     form.cause = req.body.cause;
+    form.tittle = req.body.tittle;
     form.isPrivate = req.body.isPrivate;
     form.isPublic = req.body.isPublic;
     form.whatsappNumber = req.body.whatsappNumber;
