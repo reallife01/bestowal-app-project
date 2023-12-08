@@ -16,7 +16,7 @@ function StartProject(){
           <Link to={'/ProjectAccount'}>
               <button className="inline-block px-7 py-3 mr-2 bg-orange-800
             text-white font-medium text-xs leading-snug uppercase shadow-md hover:bg-orange-500 hover:shadow-lg focus:bg-orange-500 focus:shadow-lg focus:outline-none focus:ring-0 rounded-full active:bg-orange-600 active:shadow-lg transition duration-150 ease-in-out"
-            >Get Funds</button>
+            >Donate</button>
           </Link>
       </div>
         </div>

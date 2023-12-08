@@ -5,7 +5,9 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
-const stripe = require("stripe")("sk_test_51O0BmWGBndscvsiapPtXwLzG3x7wkXbhe0AKlFe5fgphi80pZqF22qUqulvXrDjwXoBOi7o16RE3S3BHJpHLIPGV00PGcAvupv");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2022-08-01",
+});
 const {v4: uuidv4}= require("uuid");
 
 
@@ -34,6 +36,12 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send("Hello World");
 })
+
+// app.get("/config", (req, res) => {
+//   res.send({
+//     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+//   });
+// });
 
 
 

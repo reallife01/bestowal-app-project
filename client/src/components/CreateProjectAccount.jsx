@@ -132,7 +132,7 @@ border-0 text-sm text-slate-500 focus:outline-none
 focus:ring-0"
                             type="text"
                             name="title"
-                            placeholder="Your name"
+                            placeholder="Your full name"
                             required
                             value={username}
                             onChange={(e) => setUserName(e.target.value)}
