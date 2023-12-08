@@ -1,22 +1,19 @@
 
 
 import React,{useState} from 'react';
-import '../../App.css';
 import StripeCheckout from "react-stripe-checkout";
-import  './checkout.css';
-import Background from '../../images2/Untitled-design-7.png'
 
-const checkoutpage={
-  backgroundImage: `url(${Background})`,
- // backgroundPosition: 'center',
-    backgroundSize: '100%',
-   // backgroundRepeat: 'no-repeat',
-   width:'100%',
-  height:'100%',
-   position:'absolute',
-   display:'inline-block'
+// const checkoutpage={
+//   backgroundImage: `url(${Background})`,
+//  // backgroundPosition: 'center',
+//     backgroundSize: '100%',
+//    // backgroundRepeat: 'no-repeat',
+//    width:'100%',
+//   height:'100%',
+//    position:'absolute',
+//    display:'inline-block'
    
-  } 
+//   } 
   
  function Checkout() {
     

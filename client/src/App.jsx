@@ -15,6 +15,9 @@ import { ToastContainer } from 'react-toastify';
 import PreLoader from "./components/Preloader";
 import CreateProjectAccount from './components/CreateProjectAccount';
 import ProjectAccount from "./components/ProjectAccount";
+import Success from "./components/Success";
+import Cancel from "./components/Cancel";
+import Checkout from "./components/Checkout";
 
 
 
@@ -54,6 +57,9 @@ const App = () => {
         <Route path="/projects/:id" element={<Project />} className="min-h-screen relative" />
         <Route path="/createProjectAccount" element={<CreateProjectAccount />} className="min-h-screen relative"/>
         <Route path="/projectAccount" element={<ProjectAccount />} className="min-h-screen relative"/>
+        <Route path="/projectAccount" element={<Checkout />} className="min-h-screen relative"/>
+        <Route path="/projectAccount" element={<Success />} className="min-h-screen relative"/>
+        <Route path="/projectAccount" element={<Cancel />} className="min-h-screen relative"/>
       </Routes>
       ) : null}
     <ToastContainer
