@@ -55,7 +55,8 @@ const formSchema = new mongoose.Schema({
   ifscCode: Number,
   branch: String,
   estimatedAmount: Number,
-  image: String
+  image: String,
+  expiresAt: String
 });
 
 const Form = mongoose.model('Form', formSchema);
@@ -80,6 +81,7 @@ app.post('/api/donateEase', async (req, res) => {
     form.branch = req.body.branch;
     form.estimatedAmount = req.body.estimatedAmount;
     form.image = req.body.image
+    form.expiresAt = req.body.expiresAt
     
   
 

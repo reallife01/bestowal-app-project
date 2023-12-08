@@ -7,6 +7,11 @@ import { toast } from 'react-toastify';
 // Define a FormSubmit component that handles the form submission
 const CreateProjectAccount = () => {
 
+    const toTimestamp = (dateStr) => {
+        const dateObj = Date.parse(dateStr)
+        return dateObj / 1000
+      }
+
     const navigate = useNavigate();
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -46,8 +51,9 @@ const CreateProjectAccount = () => {
             whatsappNumber: whatsappNumber,
             bankAccountHolder: bankAccountHolder,
             bankAccountNumber: bankAccountNumber,
-            date: date,
+            expiresAt: toTimestamp(date),
             image: image,
+            estimatedAmount: estimatedAmount,
         };
 
         const response = await fetch("http://localhost:3001/api/donateEase", {
@@ -386,20 +392,6 @@ focus:ring-0"
                             </div>
                         </div>
                     )}
-
-                    <div className="flex justify-between items-center
-bg-gray-300 rounded-xl mt-5">
-                        <input
-                            className="block w-full bg-transparent
-border-0 text-sm text-slate-500 focus:outline-none
-focus:ring-0"
-                            type="text"
-                            name="estimatedAmount"
-                            placeholder="Enter estimated amount in Naira"
-                            value={estimatedAmount}
-                            onChange={(e) => setEstimatedAmount(e.target.value)}
-                        />
-                    </div>
                     <div
                         className="flex justify-between items-center
 bg-gray-300 rounded-xl mt-5"

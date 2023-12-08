@@ -46,9 +46,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { daysRemaining,  } from '../store'
 
-const ProjectCardAccount = () => {
+const ProjectAccount = () => {
+
   const [forms, setForms] = useState([]);
+  const expired = new Date().getTime() > Number(forms?.expiresAt + '000')
 
   useEffect(() => {
     axios.get('http://localhost:3001/getForms')
@@ -68,7 +71,7 @@ const ProjectCardAccount = () => {
   return (
     <div className="my-5 grid grid-cols-4 gap-4 justify-center">
       {forms.map(form => (
-        <div key={form._id} className="bg-gray-700 gap-3 flex basis-1/2 justify-start border-2 items-start sm:space-x-3 flex-wrap">
+        <div key={form._id} className="bg-white gap-3 flex basis-1/2 justify-start border-2 items-start sm:space-x-3 flex-wrap">
           <img
             src={form.image}
             alt={form.image}  // Fix: Access form.image instead of projectData.image
@@ -76,10 +79,23 @@ const ProjectCardAccount = () => {
           />
           <h5>{form.username}</h5>
           <h5>{form.state}</h5>
-          <h5>{form.estimatedAmount}</h5>
-          <div className="flex justify-between py-3 px-3">
-            <button onClick={handleWhatsAppPay}>Share</button>
-            <Link to={"/checkout"}><button>
+          <h5 className="text-pink-500">₦ 0 raised out of  {form.estimatedAmount}</h5>
+          <small className="text-gray-500">
+            {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}
+          </small>
+          <div className="flex space-x-4 py-3 px-3">
+            <div className="inline-block px-6 py-2.5 bg-orange-600
+            text-white font-medium text-xs leading-tight uppercase
+            rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
+            focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
+            active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">
+            <button className='' onClick={handleWhatsAppPay}>Share</button>
+            </div>
+            <Link to={"/checkout"}><button className='inline-block px-6 py-2.5 bg-orange-600
+            text-white font-medium text-xs leading-tight uppercase
+            rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
+            focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
+            active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out'>
               Donate
             </button></Link>
           </div>
@@ -89,4 +105,4 @@ const ProjectCardAccount = () => {
   );
 };
 
-export default ProjectCardAccount;
+export default ProjectAccount;

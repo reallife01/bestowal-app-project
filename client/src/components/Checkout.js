@@ -38,6 +38,7 @@ function Checkout() {
           placeholder="Enter Number"
           value={number}
         />
+        
         <StripeCheckout
           stripeKey={process.env.REACT_APP_KEY}
           token={makePayment}
