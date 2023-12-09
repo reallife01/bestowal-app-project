@@ -69,7 +69,7 @@ const ProjectAccount = () => {
   };
 
   return (
-    <div className="my-5 grid grid-cols-4 gap-4 justify-center">
+    <div className="my-5 grid grid-cols-4 gap-4 justify-center ">
       {forms.map(form => (
         <div key={form._id} className="bg-white gap-3 rounded-xl flex basis-1/2 justify-start border-2 items-start sm:space-x-3 flex-wrap">
           <img
@@ -81,14 +81,31 @@ const ProjectAccount = () => {
             <h5 className='mt-2 text-2xl italic font-semibold'>
               <span className='text-pink-500'>Name:</span> {form.username}
             </h5>
-            <p className='mt-2 font-thin text-sm'>
-              <span className="text-pink-500">description:</span> {form.cause}
-            </p>
-            <h5 className="text-pink-500 mt-2">
-              <span className="text-xl font-medium">total estimated</span>: 
+            <p className='mt-2 font-thin text-sm text-black'>{form.tittle}</p>
+            {/* <h5 className="text-pink-500 mt-2">
+              <span className="text-xl font-medium">Total cost</span>: 
               <span className='text-gray-700'> $</span>
               <span className='text-green-400'> {form.estimatedAmount}</span>
-              </h5>
+            </h5> */}
+          <div className="w-full bg-gray-300 overflow-hidden">
+            <div
+              className="bg-green-600 text-xs font-medium
+            text-blue-100 text-center p-0.5 leading-none
+            rounded-l-full"
+              style={{ width: `${(form.raised / form.estimatedAmount) * 100}%` }}
+            >
+            </div>
+          </div>
+          <div
+            className="flex justify-between items-center 
+        font-bold mt-1 mb-2 text-gray-700"
+          >
+            <small>${form.raised || 0 } usd raised</small>
+            <small className="flex justify-start items-center ml-10">
+              $
+              <span>{form.estimatedAmount} usd</span>
+            </small>
+          </div>
             <small className="text-gray-500 mt-1">
               {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}
             </small>

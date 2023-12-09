@@ -1,4 +1,5 @@
 import { setGlobalState, useGlobalState } from '../store';
+import ProjectAccount from './ProjectAccount';
 import StartProject from './StartProject';
 // import ProjectAccount from './ProjectAccount';
 import './main.css';
@@ -83,6 +84,7 @@ const Hero = () => {
       </div>
       <div className="mt-10 text-white font-bold text-xl"><button>Bank Details</button></div>
       <StartProject/>
+      <ProjectAccount/>
     </div>
   )
 }

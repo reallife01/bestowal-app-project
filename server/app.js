@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 const formSchema = new mongoose.Schema({
   username: String,
   email: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   aadharNumber: Number,
   address: String,
   state: String,
@@ -58,14 +58,15 @@ const formSchema = new mongoose.Schema({
   tittle: String,
   isPrivate: Boolean,
   isPublic: Boolean,
-  whatsappNumber: Number,
+  whatsappNumber: String,
   bankAccountHolder: String,
   bankAccountNumber: Number,
   ifscCode: Number,
   branch: String,
   estimatedAmount: Number,
   image: String,
-  expiresAt: String
+  expiresAt: String,
+  raised: String
 });
 
 const Form = mongoose.model('Form', formSchema);
@@ -90,8 +91,9 @@ app.post('/api/donateEase', async (req, res) => {
     form.ifscCode = req.body.ifscCode;
     form.branch = req.body.branch;
     form.estimatedAmount = req.body.estimatedAmount;
-    form.image = req.body.image
-    form.expiresAt = req.body.expiresAt
+    form.image = req.body.image;
+    form.expiresAt = req.body.expiresAt;
+    form.raised = req.body.raised;
     
   
 
