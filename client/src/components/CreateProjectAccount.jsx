@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 // import Hero from "./Hero";
+import { fetchFormCount } from "./fetchFormCount";
 
 
 // Define a FormSubmit component that handles the form submission
@@ -13,7 +14,6 @@ const CreateProjectAccount = () => {
         const dateObj = Date.parse(dateStr)
         return dateObj / 1000
     }
-    const [formCount, setFormCount] = useState(0);
 
     const navigate = useNavigate();
     const [username, setUserName] = useState("");
@@ -80,17 +80,7 @@ const CreateProjectAccount = () => {
             console.error('Error submitting form:', error);
         }
     };
-    const fetchFormCount = async () => {
-        try {
-          // Fetch the form count from the backend
-          const response = await axios.get('http://localhost:3001/api/get-form-count');
-          if (response.data.success) {
-            setFormCount(response.data.count);
-          }
-        } catch (error) {
-          console.error('Error fetching form count:', error);
-        }
-      };
+    
     
       useEffect(() => {
         // Fetch the initial form count when the component mounts
@@ -460,56 +450,11 @@ text-white font-medium text-md leading-tight rounded-full shadow-md hover:bg-gra
                     </button>
                 </form>
             </div>
-            <div className="hidden">
-            <FormCounter formCount={formCount} />
-            </div>
         </div>
     );
 };
 
-const FormCounter = ({ formCount }) => {
 
-    return (
-<div>
-{/* <Hero /> */}
-    <div className="flex justify-center items-center mt-10">
-            <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-            >
-                <span
-                className="text-lg font-bold text-orange-900
-                leading-5"
-                >
-                {formCount || 0}
-                </span>
-                <span>Projects</span>
-            </div>
-            <div
-                className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-            >
-                <span
-                className="text-lg font-bold text-orange-900
-                leading-5"
-                >
-                0
-                </span>
-                <span>Backings</span>
-            </div>
-            <div
-                className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-            >
-                <span
-                className="text-lg font-bold text-orange-900
-                leading-5"
-                >
-                0
-                </span>
-                <span>Donated</span>
-            </div>
-            </div>
-        </div>
-
-)
-}
 
 export default CreateProjectAccount;
 

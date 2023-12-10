@@ -1,11 +1,11 @@
 import { setGlobalState, useGlobalState } from '../store';
-// import FormCounter from './CreateProjectAccount';
+import FormCounter from "./FormCounter";
 import ProjectAccount from './ProjectAccount';
 import StartProject from './StartProject';
 import './main.css';
 import { Link } from 'react-router-dom';
 
-const Hero = (FormCounter) => {
+const Hero = () => {
   const [stats] = useGlobalState('stats')
 
   return (
@@ -48,6 +48,13 @@ const Hero = (FormCounter) => {
             Back Projects
           </button>
         </div>
+        <div className="mt-10 text-white font-bold text-xl">
+          <button>Bank Details</button>
+        </div>
+      <FormCounter />
+      <StartProject/>
+      <ProjectAccount/>
+
         <div className="mt-10 text-white font-bold text-xl"><button>Crypto  Details</button></div>
         <div className="flex justify-center items-center mt-10">
           <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
@@ -83,12 +90,7 @@ const Hero = (FormCounter) => {
             <span>Donated</span>
           </div>
         </div>
-        <div className="mt-10 text-white font-bold text-xl">
-          <button>Bank Details</button>
-        </div>
       </div>
-      <StartProject/>
-      <ProjectAccount/>
     </div>
   )
 }
