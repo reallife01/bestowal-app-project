@@ -1,7 +1,9 @@
 import { FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
+import axios from 'axios';
+// import Hero from "./Hero";
 
 
 // Define a FormSubmit component that handles the form submission
@@ -10,7 +12,8 @@ const CreateProjectAccount = () => {
     const toTimestamp = (dateStr) => {
         const dateObj = Date.parse(dateStr)
         return dateObj / 1000
-      }
+    }
+    const [formCount, setFormCount] = useState(0);
 
     const navigate = useNavigate();
     const [username, setUserName] = useState("");
@@ -38,37 +41,61 @@ const CreateProjectAccount = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = {
-            username: username,
-            tittle: tittle,
-            email: email,
-            phoneNumber: phoneNumber,
-            addNumber: addNumber,
-            address: address,
-            state: state,
-            nationality: nationality,
-            cause: cause,
-            whatsappNumber: whatsappNumber,
-            bankAccountHolder: bankAccountHolder,
-            bankAccountNumber: bankAccountNumber,
-            expiresAt: toTimestamp(date),
-            image: image,
-            estimatedAmount: estimatedAmount,
-        };
+        try {
 
-        const response = await fetch("http://localhost:3001/api/donateEase", {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        console.log(response)
+            const formData = {
+                username: username,
+                tittle: tittle,
+                email: email,
+                phoneNumber: phoneNumber,
+                addNumber: addNumber,
+                address: address,
+                state: state,
+                nationality: nationality,
+                cause: cause,
+                whatsappNumber: whatsappNumber,
+                bankAccountHolder: bankAccountHolder,
+                bankAccountNumber: bankAccountNumber,
+                expiresAt: toTimestamp(date),
+                image: image,
+                estimatedAmount: estimatedAmount,
+            };
 
-        console.log(formData);
-        toast.success("Project created successfully");
-        navigate("/projectAccount");
+            const response = await fetch("http://localhost:3001/api/donateEase", {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                const responseData = await response.json();
+                if (responseData.success) {
+                    fetchFormCount();
+                    toast.success("Project created successfully");
+                    navigate("/projectAccount");
+                }
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
+    const fetchFormCount = async () => {
+        try {
+          // Fetch the form count from the backend
+          const response = await axios.get('http://localhost:3001/api/get-form-count');
+          if (response.data.success) {
+            setFormCount(response.data.count);
+          }
+        } catch (error) {
+          console.error('Error fetching form count:', error);
+        }
+      };
+    
+      useEffect(() => {
+        // Fetch the initial form count when the component mounts
+        fetchFormCount();
+      }, []); // The empty dependency array ensures this effect runs only once
 
     return (
         <div
@@ -118,7 +145,7 @@ focus:ring-0"
                             name="title"
                             placeholder="Title"
                             required
-                            value={tittle}
+                            value={tittle || ''}
                             onChange={(e) => setTittle(e.target.value)}
                         />
                     </div>
@@ -134,7 +161,7 @@ focus:ring-0"
                             name="title"
                             placeholder="Your full name"
                             required
-                            value={username}
+                            value={username || ''}
                             onChange={(e) => setUserName(e.target.value)}
                         />
                     </div>
@@ -151,7 +178,7 @@ focus:ring-0"
                             name="estimatedAmount"
                             placeholder="Estimated amount"
                             required
-                            value={estimatedAmount}
+                            value={estimatedAmount || ''}
                             onChange={(e) => setEstimatedAmount(e.target.value)}
                         />
                     </div>
@@ -167,7 +194,7 @@ focus:ring-0"
                             name="phoneNumber"
                             placeholder="Your phone number"
                             required
-                            value={phoneNumber}
+                            value={phoneNumber || ''}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                         />
                     </div>
@@ -183,7 +210,7 @@ focus:ring-0"
                             name="email"
                             placeholder="Email"
                             required
-                            value={email}
+                            value={email || ''}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
@@ -199,7 +226,7 @@ focus:ring-0"
                             name="addNumber"
                             placeholder="Your BVN"
                             required
-                            value={addNumber}
+                            value={addNumber || ''}
                             onChange={(e) => setAddNumber(e.target.value)}
                         />
                     </div>
@@ -215,7 +242,7 @@ focus:ring-0"
                             name="address"
                             required
                             placeholder="Your full address"
-                            value={address}
+                            value={address || ''}
                             onChange={(e) => setAddress(e.target.value)}
                             rows={2}
                         />
@@ -232,7 +259,7 @@ focus:ring-0"
                             name="state"
                             required
                             placeholder="Enter state"
-                            value={state}
+                            value={state || ''}
                             onChange={(e) => setState(e.target.value)}
                         />
                     </div>
@@ -248,7 +275,7 @@ focus:ring-0"
                             type="text"
                             name="nationality"
                             placeholder="Enter nationality"
-                            value={nationality}
+                            value={nationality || ''}
                             onChange={(e) => setNationality(e.target.value)}
                         />
                     </div>
@@ -264,7 +291,7 @@ focus:ring-0"
                             type="text"
                             name="cause"
                             placeholder="Start typing..."
-                            value={cause}
+                            value={cause || ''}
                             onChange={(e) => setCause(e.target.value)}
                             rows={6}
                         />
@@ -279,7 +306,7 @@ focus:ring-0"
                             <input
                                 type="checkbox"
                                 name="isPublic"
-                                checked={isPublic}
+                                checked={isPublic || ''}
                                 onChange={(e) => setIsPublic(e.target.checked)}
                             />
 
@@ -289,7 +316,7 @@ focus:ring-0"
                             <input
                                 type="checkbox"
                                 name="isPrivate"
-                                checked={isPrivate}
+                                checked={isPrivate || ''}
                                 onChange={(e) => setIsPrivate(e.target.checked)}
                             />
 
@@ -309,7 +336,7 @@ focus:ring-0"
                                     type="text"
                                     name="whatsappNumber"
                                     placeholder="Enter WhatsApp number"
-                                    value={whatsappNumber}
+                                    value={whatsappNumber || ''}
                                     onChange={(e) => setWhatsappNumber(e.target.value)}
                                     style={{ marginBottom: "10px" }}
                                     required
@@ -341,7 +368,7 @@ focus:ring-0"
                                     type="text"
                                     name="bankAccountHolder"
                                     placeholder="Name of Account Holder"
-                                    value={bankAccountHolder}
+                                    value={bankAccountHolder || ''}
                                     onChange={(e) => setBankAccountHolder(e.target.value)}
                                 />
                             </div>
@@ -356,7 +383,7 @@ focus:ring-0"
                                     type="text"
                                     name="bankAccountNumber"
                                     placeholder="Account Number"
-                                    value={bankAccountNumber}
+                                    value={bankAccountNumber || ''}
                                     onChange={(e) => setBankAccountNumber(e.target.value)}
                                 />
                             </div>
@@ -371,7 +398,7 @@ focus:ring-0"
                                     type="text"
                                     name="ifscCode"
                                     placeholder="Bank Name"
-                                    value={ifscCode}
+                                    value={ifscCode || ''}
                                     onChange={(e) => setIfscCode(e.target.value)}
                                 />
                             </div>
@@ -386,7 +413,7 @@ focus:ring-0"
                                     type="text"
                                     name="branch"
                                     placeholder="Branch"
-                                    value={branch}
+                                    value={branch || ''}
                                     onChange={(e) => setBranch(e.target.value)}
                                 />
                             </div>
@@ -404,7 +431,7 @@ focus:ring-0"
                             name="date"
                             placeholder="Expires"
                             required
-                            value={date}
+                            value={date || ''}
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </div>
@@ -419,7 +446,7 @@ focus:ring-0"
                             type="url"
                             name="image"
                             placeholder="Image Url"
-                            value={image}
+                            value={image || ''}
                             onChange={(e) => setImage(e.target.value)}
                             required
                         />
@@ -433,7 +460,57 @@ text-white font-medium text-md leading-tight rounded-full shadow-md hover:bg-gra
                     </button>
                 </form>
             </div>
+            <div className="hidden">
+            <FormCounter formCount={formCount} />
+            </div>
         </div>
     );
 };
+
+const FormCounter = ({ formCount }) => {
+
+    return (
+<div>
+{/* <Hero /> */}
+    <div className="flex justify-center items-center mt-10">
+            <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+            >
+                <span
+                className="text-lg font-bold text-orange-900
+                leading-5"
+                >
+                {formCount || 0}
+                </span>
+                <span>Projects</span>
+            </div>
+            <div
+                className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+            >
+                <span
+                className="text-lg font-bold text-orange-900
+                leading-5"
+                >
+                0
+                </span>
+                <span>Backings</span>
+            </div>
+            <div
+                className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+            >
+                <span
+                className="text-lg font-bold text-orange-900
+                leading-5"
+                >
+                0
+                </span>
+                <span>Donated</span>
+            </div>
+            </div>
+        </div>
+
+)
+}
+
 export default CreateProjectAccount;
+
+

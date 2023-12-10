@@ -71,61 +71,56 @@ const ProjectAccount = () => {
   return (
     <div className="my-5 grid grid-cols-4 gap-4 justify-center ">
       {forms.map(form => (
-        <div key={form._id} className="bg-white gap-3 rounded-xl flex basis-1/2 justify-start border-2 items-start sm:space-x-3 flex-wrap">
+        <div key={form._id} className="bg-white gap-3 rounded-xl sm:space-x-3 ">
           <img
             src={form.image}
-            alt={form.image}  // Fix: Access form.image instead of projectData.image
+            alt={form.image}  // Fix: Access form.image 
             className="rounded-xl h-64 w-full object-cover"
           />
-          <div className='grid mb-4'>
-            <h5 className='mt-2 text-2xl italic font-semibold'>
-              <span className='text-pink-500'>Name:</span> {form.username}
-            </h5>
-            <p className='mt-2 font-thin text-sm text-black'>{form.tittle}</p>
-            {/* <h5 className="text-pink-500 mt-2">
-              <span className="text-xl font-medium">Total cost</span>: 
-              <span className='text-gray-700'> $</span>
-              <span className='text-green-400'> {form.estimatedAmount}</span>
-            </h5> */}
-          <div className="w-full bg-gray-300 overflow-hidden">
-            <div
-              className="bg-green-600 text-xs font-medium
-            text-blue-100 text-center p-0.5 leading-none
-            rounded-l-full"
-              style={{ width: `${(form.raised / form.estimatedAmount) * 100}%` }}
-            >
+          <div className='p-4'>
+            <div className='flex flex-col text-left'>
+              <h5 className='mt-2 text-2xl italic font-semibold text-black'>
+              {form.username}
+              </h5>
+              <p className='mt-2 font-thin text-lg text-black'>{form.tittle}</p>
+              <small className="text-gray-500 mt-1">
+                {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}
+              </small>
             </div>
-          </div>
-          <div
-            className="flex justify-between items-center 
+              <div className="w-full bg-gray-300 overflow-hidden">
+                <div
+                  className="bg-green-600 text-xs font-medium
+                text-blue-100 text-center p-0.5 leading-none
+                rounded-l-full"
+                  style={{ width: `${(form.raised / form.estimatedAmount) * 100}%` }}
+                >
+                </div>
+            </div>
+            <div className="flex justify-between items-center 
         font-bold mt-1 mb-2 text-gray-700"
-          >
-            <small>${form.raised || 0 } usd raised</small>
-            <small className="flex justify-start items-center ml-10">
-              $
-              <span>{form.estimatedAmount} usd</span>
-            </small>
-          </div>
-            <small className="text-gray-500 mt-1">
-              {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}
-            </small>
+            >
+              <small>${form.raised || 0 } usd raised</small>
+              <small className="">$ <span>{form.estimatedAmount} usd</span></small>
             </div>
-          <div className="flex  space-x-4 py-3 px-3">
-            <div className="ml-2.5 inline-block px-6 py-2.5 bg-orange-600
-            text-white font-medium text-xs leading-tight uppercase
-            rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
-            focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
-            active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">
-            <button className='' onClick={handleWhatsAppPay}>Share</button>
             </div>
-            <a href="https://donate.stripe.com/test_aEU5mt5qi6So1Ko288"><button className='ml-10 inline-block px-6 py-2.5 bg-orange-600
-            text-white font-medium text-xs leading-tight uppercase
-            rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
-            focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
-            active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out'>
-              Donate
-            </button></a>
-          </div>
+            <div className="flex  space-x-4 py-3 px-3">
+              <div className="ml-2.5 inline-block px-6 py-2.5 bg-orange-600
+              text-white font-medium text-xs leading-tight uppercase
+              rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
+              focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">
+              <button className='' onClick={handleWhatsAppPay}>Share</button>
+              </div>
+              <a href="https://donate.stripe.com/test_aEU5mt5qi6So1Ko288">
+                <button className='ml-10 inline-block px-6 py-2.5 bg-orange-600
+              text-white font-medium text-xs leading-tight uppercase
+              rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
+              focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out'>
+                Donate
+                </button>
+              </a>
+            </div>
         </div>
       ))}
     </div>

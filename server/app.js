@@ -143,22 +143,35 @@ app.post("/checkout", (req, res) => {
     
 });
 
-app.post("/api/fundraisers", async (req, res) => {
+// app.post("/api/fundraisers", async (req, res) => {
+//   try {
+//     const formData = req.body;
+
+//     // Create a new instance of the Fundraiser model with the form data
+//     const fundraiser = new Fundraiser(formData);
+
+//     // Save the fundraiser data to the database
+//     await fundraiser.save();
+
+//     res.status(200).json({ message: "Fundraiser data saved successfully." });
+//   } catch (error) {
+//     console.error("Error saving fundraiser:", error);
+//     res.status(500).json({ error: "An error occurred while saving the fundraiser data." });
+//   }
+// });
+
+
+app.get('/get-form-count', async (req, res) => {
   try {
-    const formData = req.body;
-
-    // Create a new instance of the Fundraiser model with the form data
-    const fundraiser = new Fundraiser(formData);
-
-    // Save the fundraiser data to the database
-    await fundraiser.save();
-
-    res.status(200).json({ message: "Fundraiser data saved successfully." });
+    const counterValue = await collection.findOne({ key: 'Form' });
+    client.close();
+    res.json({ success: true, count: counterValue ? counterValue.count : 0 });
   } catch (error) {
-    console.error("Error saving fundraiser:", error);
-    res.status(500).json({ error: "An error occurred while saving the fundraiser data." });
+    console.error('Error getting form count:', error);
+    res.status(500).json({ success: false });
   }
 });
+
 
 // API endpoint to fetch project data
 // Example in your server.js or wherever you define routes
