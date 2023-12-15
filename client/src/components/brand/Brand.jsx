@@ -1,20 +1,20 @@
 import React from "react";
-import { google, slack, dropbox, shopify } from "./index";
+import assets from "../../assets"; // Assuming your asset file is named index.js and located in the "../../assets" directory
 import "./brand.css";
 
 const Brand = () => (
     <div className="gpt3__brand section__padding">
         <div>
-            <img src={google} />
+            <img src={assets.google} alt="Google" />
         </div>
         <div>
-            <img src={slack} />
+            <img src={assets.slack} alt="Slack" />
         </div>
         <div>
-            <img src={dropbox} />
+            <img src={assets.dropbox} alt="Dropbox" />
         </div>
         <div>
-            <img src={shopify} />
+            <img src={assets.shopify} alt="Shopify" />
         </div>
     </div>
 );

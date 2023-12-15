@@ -100,7 +100,7 @@ const CreateProjectAccount = () => {
                 <form onSubmit={handleFormSubmit} className="flex flex-col ">
                     <div className="flex justify-between items-center">
                         <p className="font-semibold text-purple-800">Add Project</p>
-                        <Link to={"/dashboard"}>
+                        <Link to={"/hero"}>
                             <button
                                 type="button"
                                 className="border-0 bg-transparent focus:outline-none"
@@ -115,7 +115,7 @@ const CreateProjectAccount = () => {
                             <img
                                 src={
                                     image ||
-                                    "https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
+                                    "https://c8.alamy.com/comp/2RTP3EB/bestowal-set-creative-icons-kindness-organ-donation-social-responsibility-world-embracing-hope-disabled-aid-sponsorship-charitable-foundation-2RTP3EB.jpg"
                                 }
                                 alt="project title"
                                 className="h-full w-full object-cover cursor-pointer"

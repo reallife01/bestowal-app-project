@@ -23,7 +23,7 @@ const FormCounter = () => {
                 className="text-lg font-bold text-orange-900
                 leading-5"
                 >
-                {formCount || 0}
+                {formCount || 1}
                 </span>
                 <span>Projects</span>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { bestowal1 } from '../../assets';
+import assets from '../../assets';
 import './footer.css';
 
 const Footer = () => (
@@ -14,7 +14,7 @@ const Footer = () => (
 
     <div className="bestowal__footer-links">
       <div className="bestowal__footer-links_logo">
-        <img src={bestowal1} alt="gpt3_logo" />
+        <img src={assets.bestowal1} alt="gpt3_logo" />
         <p>No 6 Adebola Adeniyi street, Ota Ogun, Ng <br /> All Rights Reserved</p>
       </div>
       <div className="bestowal__footer-links_div">

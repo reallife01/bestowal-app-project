@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import {customerMain} from '../../assets';
+import assets from '../../assets';
 import "./contact.css";
+
 
 const Contact = () => {
     const [msg, setMsg] = useState({
@@ -66,7 +67,7 @@ const Contact = () => {
                 </div>
                 <div className="formRow">
                     <div className='imageDiv'>
-                        <img src={customerMain} alt='customerCare' className='imageContainer' />
+                        <img src={assets.customerMain} alt='customerMain' className='imageContainer' />
                     </div>
                     <div className='formColumn'>
                         <form onSubmit={handleSubmit} method="POST">

@@ -1,5 +1,5 @@
 import './header.css';
-import { people, global1 } from '../../assets';
+import assets from '../../assets';
 import Brand from '../../components/brand/Brand';
 import About from '../about/About';
 import Features from '../features/Features';
@@ -21,13 +21,13 @@ const Header = () => (
         </div>
 
         <div className="bestowal__header-content__people">
-          <img src={people} />
+          <img src={assets.people} />
           <p>1,640 people requested access a visit in last 24 hours</p>
         </div>
       </div>
 
       <div className="bestowal__header-image">
-        <img src={global1} />
+        <img src={assets.global1} />
       </div>
     </div>
   <Brand />
