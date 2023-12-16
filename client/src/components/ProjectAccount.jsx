@@ -45,10 +45,12 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { daysRemaining,  } from '../store'
 
 const ProjectAccount = () => {
+  const { id } = useParams();
 
   const [forms, setForms] = useState([]);
   const expired = new Date().getTime() > Number(forms?.expiresAt + '000')
@@ -58,17 +60,27 @@ const ProjectAccount = () => {
       .then(response => setForms(response.data))
       .catch(err => console.log(err));
   }, []);
+
+  // useEffect(() => {
+  //   // Check if 'id' is available before making the request
+  //   if (id) {
+  //     axios.get(`http://localhost:3001/getForms/${id}`)
+  //       .then(response => setForms([response.data]))
+  //       .catch(err => console.log(err));
+  //   }
+  // }, [id]);
   
 
-  const handleWhatsAppPay = () => {
-    const stripeLink = "https://donate.stripe.com/test_aEU5mt5qi6So1Ko288";
-    const message = `Hey, I want to make a payment. Here's the link: ${stripeLink}`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
-    window.open(whatsappLink);
-  };
+  // const handleWhatsAppPay = () => {
+  //   const stripeLink = "https://donate.stripe.com/test_aEU5mt5qi6So1Ko288";
+  //   const message = `Hey, I want to make a payment. Here's the link: ${stripeLink}`;
+  //   const encodedMessage = encodeURIComponent(message);
+  //   const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
+  //   window.open(whatsappLink);
+  // };
 
   return (
+
     <div className="my-5 grid grid-cols-4 gap-4 justify-center ">
       {forms.map(form => (
         <div key={form._id} className="bg-white gap-3 rounded-xl sm:space-x-3 ">
@@ -103,7 +115,7 @@ const ProjectAccount = () => {
               <small className="">$ <span>{form.estimatedAmount} usd</span></small>
             </div>
             </div>
-            <div className="flex  space-x-4 py-3 px-3">
+            {/* <div className="flex  space-x-4 py-3 px-3">
               <div className="ml-2.5 inline-block px-6 py-2.5 bg-orange-600
               text-white font-medium text-xs leading-tight uppercase
               rounded-full shadow-md hover:bg-gray-700 hover:shadow-lg
@@ -120,7 +132,8 @@ const ProjectAccount = () => {
                 Donate
                 </button>
               </a>
-            </div>
+            </div> */}
+            <Link to={`/campaign-details-account/${id}`} className='text-red-400'>View Details</Link>
         </div>
       ))}
     </div>

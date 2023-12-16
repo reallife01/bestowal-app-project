@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import FundCard from './FundCard';
 import assets from '../assets';
 
-const DisplayCampaigns = ({ title, isLoading, campaigns, donators }) => {
+const DisplayCampaigns = ({ title, isLoading, campaigns, }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
