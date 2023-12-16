@@ -1,10 +1,8 @@
 import { FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from 'react-toastify';
-import axios from 'axios';
-// import Hero from "./Hero";
-import { fetchFormCount } from "./fetchFormCount";
+
 
 
 // Define a FormSubmit component that handles the form submission
@@ -34,14 +32,12 @@ const CreateProjectAccount = () => {
     const [branch, setBranch] = useState("");
     const [estimatedAmount, setEstimatedAmount] = useState("");
     const [date, setDate] = useState("");
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState("");
 
 
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
-        try {
 
             const formData = {
                 username: username,
@@ -61,31 +57,33 @@ const CreateProjectAccount = () => {
                 estimatedAmount: estimatedAmount,
             };
 
-            const response = await fetch("http://localhost:3001/api/donateEase", {
-                method: "POST",
+            const response = await fetch('http://localhost:3001/api/donateEase', {
+                method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            if (response.ok) {
-                const responseData = await response.json();
-                if (responseData.success) {
-                    fetchFormCount();
-                    toast.success("Project created successfully");
-                    navigate("/projectAccount");
+                    'Content-Type': 'application/json'
                 }
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
+            });
+            console.log(response)
+            toast.success("Project created successfully");
+            navigate("/projectAccount");
+    
+            console.log(formData);
+    
     };
-    
-    
-      useEffect(() => {
-        // Fetch the initial form count when the component mounts
-        fetchFormCount();
-      }, []); // The empty dependency array ensures this effect runs only once
+    //         if (response) {
+    //             const responseData = await response.json();
+    //             if (responseData.success) {
+    //                 toast.success("Project created successfully");
+    //                 navigate("/projectAccount");
+    //             }
+    //         } else {
+    //             console.log("Project creation failed");
+    //         }
+    //     } catch (error) {
+    //         console.error('Error submitting form:', error);
+    //     }
+    // };
 
     return (
         <div

@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { fetchFormCount } from "./fetchFormCount";
-const FormCounter = () => {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-    const [formCount, setFormCount] = useState(0);
+const FormCounter = () => {
+//   const [projectCount, setProjectCount] = useState(0);
+  const [forms, setForms] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const count = await fetchFormCount();
-      setFormCount(count);
+    const fetchForms = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/getForms');
+        setForms(response.data.count);
+      } catch (error) {
+        console.error('Error fetching project count:', error);
+      }
     };
 
-    fetchData();
+    fetchForms();
   }, []);
 
     return (
@@ -23,7 +28,7 @@ const FormCounter = () => {
                 className="text-lg font-bold text-orange-900
                 leading-5"
                 >
-                {formCount || 1}
+                {forms || 0}
                 </span>
                 <span>Projects</span>
             </div>
