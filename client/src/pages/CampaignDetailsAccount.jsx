@@ -1,43 +1,61 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { CountBox, Loader } from '../components';
-import axios from 'axios'; 
+import axios from 'axios';
+import { Loader } from '../components';
 import assets from '../assets';
 
+// Error component for handling API errors
+const ErrorComponent = () => (
+    <div className="error-message">
+        <p>Oops! Something went wrong. Please try again later.</p>
+    </div>
+);
+
 const CampaignDetailsAccount = () => {
-    //   const navigate = useNavigate();
     const { id } = useParams();
-    // const [form, setForm] = useState(null);
-
-
     const [isLoading, setIsLoading] = useState(false);
+    const [forms, setForms] = useState(null);
+    const [error, setError] = useState(null);
 
-    const [forms, setForms] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/getForms/${id}`);
-      setForms(response.data);
-    } catch (error) {
-      console.error('Error fetching form data:', error);
+    useEffect(() => {
+        console.log('ID parameter:', id);
+      
+        const fetchData = async () => {
+          try {
+            setIsLoading(true);
+      
+            if (!id) {
+              console.error('ID is undefined');
+              return;
+            }
+      
+            console.log('Making API request with ID:', id);
+      
+            const response = await axios.get(`http://localhost:3001/getForms/${id}`);
+            console.log('API response:', response.data);
+      
+            setForms(response.data);
+          } catch (error) {
+            console.error('Error fetching form data:', error);
+            setError(error);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+      
+        fetchData();
+      }, [id]);
+      
+    if (isLoading || !forms) {
+        return <Loader />;
     }
-  };
 
-  useEffect(() => {
-    fetchData(); // Make sure to call fetchData with the id parameter
-  }, [id]);
-
-    if (!forms) {
-        return <div>Loading...</div>;
+    if (error) {
+        return <ErrorComponent />;
     }
 
 
-    //   const handleDonate = async () => {
-    //     setIsLoading(true);
-    //     navigate('/hero')
-    //     setIsLoading(false);
-    //   }
-
+    // Render the rest of your component
     return (
         <div className='mx-10'>
             {isLoading && <Loader />}
@@ -53,7 +71,7 @@ const CampaignDetailsAccount = () => {
 
                 <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
                     {/* <CountBox title="Days Left" value={remainingDays} /> */}
-                    <CountBox title={`Raised of ${forms.target}`} value={forms.amountCollected} />
+                    {/* <CountBox title={`Raised of ${forms.target}`} value={forms.amountCollected} /> */}
                     {/* <CountBox title="Total Backers" value={donators.length} /> */}
                 </div>
             </div>
