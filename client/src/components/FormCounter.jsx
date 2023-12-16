@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const FormCounter = () => {
-//   const [projectCount, setProjectCount] = useState(0);
   const [forms, setForms] = useState(0);
 
   useEffect(() => {
     const fetchForms = async () => {
       try {
         const response = await axios.get('http://localhost:3001/getForms');
-        setForms(response.data.count);
+        // Corrected line
+        setForms(response.data);
       } catch (error) {
         console.error('Error fetching project count:', error);
       }
     };
-
+  
     fetchForms();
   }, []);
+  
 
     return (
 <div>
@@ -28,7 +29,7 @@ const FormCounter = () => {
                 className="text-lg font-bold text-orange-900
                 leading-5"
                 >
-                {forms || 0}
+                {forms.count || 1}
                 </span>
                 <span>Projects</span>
             </div>
