@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import FundCard from './FundCard';
 import assets from '../assets';
 
-const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
+const DisplayCampaigns = ({ title, isLoading, campaigns, donators }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
@@ -13,7 +13,41 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   
   return (
     <div>
-      <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
+            <div className="flex justify-center items-center mt-10">
+          <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+          >
+            <span
+              className="text-lg font-bold text-orange-900
+              leading-5"
+            >
+            {campaigns.length}
+            </span>
+            <span>{title}</span>
+          </div>
+          {/* <div
+            className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+          >
+            <span
+              className="text-lg font-bold text-orange-900
+              leading-5"
+            >
+             0
+            </span>
+            <span>Backings</span>
+          </div> */}
+          {/* <div
+            className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
+          >
+            <span
+              className="text-lg font-bold text-orange-900
+              leading-5"
+            >
+            0
+            </span>
+            <span>Donated</span>
+          </div> */}
+        </div>
+      {/* <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1> */}
 
       <div className="flex flex-wrap mt-[20px] gap-[26px]">
         {isLoading && (

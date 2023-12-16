@@ -27,7 +27,7 @@ const FormCounter = () => {
                 </span>
                 <span>Projects</span>
             </div>
-            <div
+            {/* <div
                 className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
             >
                 <span
@@ -48,7 +48,7 @@ const FormCounter = () => {
                 0
                 </span>
                 <span>Donated</span>
-            </div>
+            </div> */}
             </div>
         </div>
 

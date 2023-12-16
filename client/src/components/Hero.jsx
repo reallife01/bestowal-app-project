@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Home } from "../pages";
 
 
-const Hero = () => {
+const Hero = (campaigns) => {
   // const [stats] = useGlobalState('stats')
 
   return (
@@ -57,40 +57,8 @@ const Hero = () => {
         </div>
       <FormCounter />
       <ProjectAccount/>
-        <div className="mt-10 text-white font-bold text-xl"><button>Crypto  Details</button></div>
-        <div className="flex justify-center items-center mt-10">
-          <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-          >
-            <span
-              className="text-lg font-bold text-orange-900
-              leading-5"
-            >
-              0
-            </span>
-            <span>Projects</span>
-          </div>
-          <div
-            className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-          >
-            <span
-              className="text-lg font-bold text-orange-900
-              leading-5"
-            >
-             0
-            </span>
-            <span>Backings</span>
-          </div>
-          <div
-            className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-          >
-            <span
-              className="text-lg font-bold text-orange-900
-              leading-5"
-            >
-            0
-            </span>
-            <span>Donated</span>
-          </div>
+        <div className="mt-10 text-white font-bold text-xl">
+          <button>Crypto  Details</button>
         </div>
       </div>
       <Home/>
