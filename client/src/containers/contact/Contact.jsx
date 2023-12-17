@@ -67,7 +67,7 @@ const Contact = () => {
                 </div>
                 <div className="formRow">
                     <div className='imageDiv'>
-                        <img src={assets.customerMain} alt='customerMain' className='imageContainer' />
+                        <img src={assets.freshCare} alt='customerMain' className='imageContainer' />
                     </div>
                     <div className='formColumn'>
                         <form onSubmit={handleSubmit} method="POST">

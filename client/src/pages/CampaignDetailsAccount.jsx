@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Loader } from '../components';
-import assets from '../assets';
+// import assets from '../assets';
 
 // Error component for handling API errors
 const ErrorComponent = () => (
@@ -12,43 +12,32 @@ const ErrorComponent = () => (
 );
 
 const CampaignDetailsAccount = () => {
+    // const navigate = useNavigate();
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const [forms, setForms] = useState(null);
+    const [forms, setForms] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log('ID parameter:', id);
-      
+        // console.log('ID parameter:', id);
+    
         const fetchData = async () => {
-          try {
-            setIsLoading(true);
-      
-            if (!id) {
-              console.error('ID is undefined');
-              return;
+            try {
+              const response = await axios.get(`http://localhost:3001/getForms/${id}`);
+              setForms(response.data);
+            } catch (error) {
+              console.error('Error fetching form data:', error);
+              setError(error.response.data); // Use error.response.data for JSON errors
+            } finally {
+              setIsLoading(false);
             }
-      
-            console.log('Making API request with ID:', id);
-      
-            const response = await axios.get(`http://localhost:3001/getForms/${id}`);
-            console.log('API response:', response.data);
-      
-            setForms(response.data);
-          } catch (error) {
-            console.error('Error fetching form data:', error);
-            setError(error);
-          } finally {
-            setIsLoading(false);
-          }
-        };
-      
+          };
+          
+    
         fetchData();
-      }, [id]);
-      
-    if (isLoading || !forms) {
-        return <Loader />;
-    }
+    }, [id]);
+    
+    
 
     if (error) {
         return <ErrorComponent />;
@@ -60,7 +49,7 @@ const CampaignDetailsAccount = () => {
         <div className='mx-10'>
             {isLoading && <Loader />}
 
-            <div className="w-full flex md:flex-row flex-col mt-10  gap-[30px]">
+            <div className="w-full flex md:flex-row flex-col mt-10  gap-[30px]" key={forms._id}>
                 <div className="bg-white flex-1 flex-col">
                     <img src={forms.image} alt="campaign" className="w-full h-[410px] object-cover rounded-xl" />
                     <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
@@ -82,9 +71,9 @@ const CampaignDetailsAccount = () => {
                         <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Creator</h4>
 
                         <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
-                            <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
+                            {/* <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
                                 <img src={assets.thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
-                            </div>
+                            </div> */}
                             <div>
                                 <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]"></p>
                             </div>

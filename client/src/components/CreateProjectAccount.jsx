@@ -66,7 +66,7 @@ const CreateProjectAccount = () => {
             });
             console.log(response)
             toast.success("Project created successfully");
-            navigate("/projectAccount");
+            navigate("/hero");
     
             console.log(formData);
     

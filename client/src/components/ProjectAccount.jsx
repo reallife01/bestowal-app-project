@@ -103,39 +103,36 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import { daysRemaining,  } from '../store'
+import { daysRemaining } from '../store';
 
 const ProjectAccount = () => {
   const { id } = useParams();
-
   const [forms, setForms] = useState([]);
   const expired = new Date().getTime() > Number(forms?.expiresAt + '000')
+  const [isLoading, setIsLoading] = useState(true); // Initialize loading state
 
   useEffect(() => {
-    // Check if 'id' is available before making the request
-    if (id) {
-        axios.get(`http://localhost:3001/getForms/${id}`)
-            .then(response => setForms([response.data]))
-            .catch(err => console.log(err));
-    } else {
-        // If 'id' is not available, fetch all forms
-        axios.get('http://localhost:3001/getForms')
-            .then(response => setForms(response.data))
-            .catch(err => console.log(err));
-    }
-}, [id]);
+    const fetchData = async () => {
+      try {
+        let response;
 
+        if (id) {
+          response = await axios.get(`http://localhost:3001/getForms/${id}`);
+          setForms([response.data]);
+        } else {
+          response = await axios.get('http://localhost:3001/getForms');
+          setForms(response.data);
+        }
 
+        setIsLoading(false); // Set loading to false after successful data fetch
+      } catch (error) {
+        console.error('Error fetching form data:', error);
+        setIsLoading(false); // Set loading to false in case of an error
+      }
+    };
 
-  // useEffect(() => {
-  //   // Check if 'id' is available before making the request
-  //   if (id) {
-  //     axios.get(`http://localhost:3001/getForms/${id}`)
-  //       .then(response => setForms([response.data]))
-  //       .catch(err => console.log(err));
-  //   }
-  // }, [id]);
-  
+    fetchData();
+  }, [id]);
 
   const handleWhatsAppPay = () => {
     const stripeLink = "https://donate.stripe.com/test_aEU5mt5qi6So1Ko288";
@@ -145,31 +142,31 @@ const ProjectAccount = () => {
     window.open(whatsappLink);
   };
 
+  if (isLoading) {
+    return <p>Loading...</p>; // You can replace this with a loading spinner or component
+  }
+
   return (
-  <div>
-    {/* <div className="flex justify-center items-center mt-10">
-      <div className="flex flex-col justify-center items-center h-20 border border-gray-200 shadow-md w-full"
-            >
-        <span className="text-lg font-bold text-orange-900 leading-5">
-          {forms.count || 0}
-        </span>
-        <span>Projects</span>
-      </div>
-    </div> */}
-    <div className="my-5 grid grid-cols-4 gap-4 justify-center ">
+    <div>
+      <div className="my-5 grid grid-cols-4 gap-4 justify-center ">
       {forms.map(form => (
         <div key={form._id} className="bg-[#1c1c24] gap-3 rounded-xl sm:space-x-3 ">
           <img
             src={form.image}
             alt={form.image}  // Fix: Access form.image 
-            className="rounded-xl h-64 w-full object-cover"
+            className="w-full h-[158px] object-cover rounded-[15px]"
           />
           <div className='p-4'>
+            <div className="block">
+            <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">{form.tittle}</h3>
+            <h5 className="font-epilogue font-semibold text-[14px] text-white text-left leading-[24px] truncate">{form.email}</h5>
+            <p className="mt-[5px] font-epilogue font-normal text-[#808191] text-left leading-[18px] truncate">{form.cause}</p>
+          </div>
             <div className='flex flex-col text-left'>
-              <h5 className='mt-2 text-2xl italic font-semibold text-white'>
+              {/* <h5 className='mt-2 text-2xl italic font-semibold text-white'>
               {form.username}
               </h5>
-              <p className='mt-2 font-thin text-lg text-white'>{form.tittle}</p>
+              <p className='mt-2 font-thin text-lg text-white'>{form.tittle}</p> */}
               <small className="text-[#b2b3bd] mt-1">
                 {expired ? 'Expired' : daysRemaining(form.expiresAt) + ' left'}
               </small>
@@ -186,7 +183,7 @@ const ProjectAccount = () => {
             <div className="flex justify-between items-center 
         font-bold mt-1 mb-2 text-[#b2b3bd]"
             >
-              <small>${form.raised || 0 } usd raised</small>
+              <small>$ {form.raised || 0 } usd raised</small>
               <small className="">$ <span>{form.estimatedAmount} usd</span></small>
             </div>
             </div>
@@ -208,7 +205,7 @@ const ProjectAccount = () => {
                 </button>
               </a>
             </div>
-            {/* <Link to={`/campaign/${form.id}`} className='text-red-400'>View Details</Link> */}
+            <Link to={`/campaign/${form._id}`} className='text-red-400'>View Details</Link>
         </div>
       ))}
     </div>

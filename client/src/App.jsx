@@ -15,6 +15,10 @@ import CreateProjectAccount from './components/CreateProjectAccount';
 import ProjectAccount from "./components/ProjectAccount";
 import Hero from "./components/Hero";
 import CampaignDetailsAccount from "./pages/CampaignDetailsAccount";
+// import CampaignDetailsAccount from "./pages/CampaignDetailsAccount";
+// import CampaignDetailsAccount from "./pages/CampaignDetailsAccount";
+// import CampaignDetailsAccount from './path-to/CampaignDetailsAccount';
+// import CampaignDetailsAccount from './CampaignDetailsAccount';
 
 
 
@@ -58,7 +62,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/create-campaign" element={<CreateCampaign />} />
         <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-        <Route path="/campaign/:id" element={<CampaignDetailsAccount />} />
+        {/* <Route path="/campaign-details-account/:id" element={<CampaignDetailsAccount />} /> */}
+        <Route path="/campaign/:id"  element={<CampaignDetailsAccount />}/>
         <Route path="/createProjectAccount" element={<CreateProjectAccount />} className="min-h-screen relative"/>
         <Route path="/projectAccount" element={<ProjectAccount />} className="min-h-screen relative"/>
       </Routes>

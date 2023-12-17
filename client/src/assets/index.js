@@ -41,6 +41,8 @@ import  google from './google.png';
 import  slack from './slack.png';
 import  dropbox from './dropbox.png';
 import  shopify from './shopify.png';
+import  freshCare from './freshCare.png';
+
 
 
 
@@ -67,7 +69,8 @@ export default{
   google, 
   slack, 
   dropbox, 
-  shopify
+  shopify,
+  freshCare,
 };
 
 
