@@ -43,6 +43,38 @@ app.get('/', (req, res) => {
 //   });
 // });
 
+const donationSchema = new mongoose.Schema({
+  formId: String,
+  campaignName: String,
+  donatorName: String,
+  donationAmount: Number,
+});
+
+const Donation = mongoose.model('Donation', donationSchema);
+
+// Endpoint to handle donation submissions
+app.post('/donate/:formId', async (req, res) => {
+  const { formId } = req.params;
+  const { campaignName, donatorName, donationAmount, } = req.body;
+
+  try {
+    // Save the donation data to MongoDB
+    const donation = new Donation({
+      formId,
+      campaignName,
+      donatorName,
+      donationAmount,
+    });
+
+    await donation.save();
+
+    res.status(201).json({ message: 'Donation submitted successfully' });
+  } catch (error) {
+    console.error('Error saving donation:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 
@@ -66,7 +98,8 @@ const formSchema = new mongoose.Schema({
   estimatedAmount: Number,
   image: String,
   expiresAt: String,
-  raised: String
+  raised: String,
+  donator: String,
 });
 
 const Form = mongoose.model('Form', formSchema);
@@ -94,6 +127,7 @@ app.post('/api/donateEase', async (req, res) => {
     form.image = req.body.image;
     form.expiresAt = req.body.expiresAt;
     form.raised = req.body.raised;
+    form.donator = req.body.donator;
     
   
 

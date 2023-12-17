@@ -42,7 +42,7 @@ const Navbar = (props) => {
           <div className="sm:flex hidden flex-row justify-end gap-4">
         <CustomButton 
           btnType="button"
-          title={address ? 'Connected' : 'Connect'}
+          title={address ? 'Connected' : 'Connect MetaMask'}
           styles={address ? 'bg-orange-600' : 'bg-[#8c6dfd]'}
           handleClick={() => {
             if(address) navigate('/create-campaign')
@@ -76,7 +76,7 @@ const Navbar = (props) => {
           <div className="flex mx-4">
             <CustomButton 
               btnType="button"
-              title={address ? 'Connected' : 'Connect'}
+              title={address ? 'Connected' : 'Connect MetaMask'}
               styles={address ? 'bg-orange-600' : 'bg-[#8c6dfd]'}
               handleClick={() => {
                 if(address) navigate('/create-campaign')
