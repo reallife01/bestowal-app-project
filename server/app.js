@@ -106,6 +106,11 @@ app.post('/api/donateEase', async (req, res) => {
   }
 });
 
+
+
+
+
+
 app.post("/checkout", (req, res) => {
   const { number, token } = req.body;
   console.log("AMOUNT ", number);
@@ -181,6 +186,21 @@ app.get('/getForms', async (req, res) => {
   .then(forms => res.json(forms) )
   .catch(err => res.json(err))
 });
+
+app.get('/getForms/:formId', async (req, res) => {
+  const { formId } = req.params;
+  // Your logic to fetch a specific form from MongoDB based on formId
+  await Form.findOne({ _id: formId })
+    .then(forms => {
+      if (forms) {
+        res.json(forms);
+      } else {
+        res.status(404).json({ error: 'Form not found' });
+      }
+    })
+    .catch(err => res.status(500).json({ error: 'Internal server error' }));
+});
+
 
   
 
