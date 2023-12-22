@@ -30,6 +30,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+// app.use(cors(
+//   {
+//       origin: ["https://deploy-mern-frontend.vercel.app"],
+//       methods: ["POST", "GET"],
+//       credentials: true
+//   }
+// ));
 
 
 
