@@ -1,24 +1,51 @@
-// Import All Dependencies
+
 const dotenv = require('dotenv');
 const express = require('express');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2022-08-01",
+const dbUri = process.env.DATABASE || 'mongodb+srv://lateefaminu205:Asus99137@cluster0.aotk9gk.mongodb.net/?retryWrites=true&w=majority';
+
+mongoose.connect(dbUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("Mongo DB connection established");
+}).catch((e) => {
+  console.log("Error connecting to MongoDB:", e);
 });
-const {v4: uuidv4}= require("uuid");
 
 
-const app = express();
+
 
 // Configure ENV File & Require Connection File
-dotenv.config({ path: './config.env' });
-require('./db/conn');
+dotenv.config({ path: './.env' });
+
+const app = express();
+// const { MongoClient } = require('mongodb'); // Add this import
 const port = process.env.PORT;
 
+// const CONNECTION_STRING = process.env.CONNECTION_STRING;
+// const DATABASE_NAME = process.env.DATABASENAME;
 
+// let database;
+
+// app.listen(port, () => {
+//   try {
+//     console.log("Attempting to connect to MongoDB with connection string:", CONNECTION_STRING);
+//     MongoClient.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+//       if (error) {
+//         console.error('Error connecting to MongoDB:', error);
+//         return;
+//       }
+//       database = client.db(DATABASE_NAME);
+//       console.log("Server is Listening");
+//       console.log("Mongo DB connection established");
+//     });
+//   } catch (error) {
+//     console.error('Error during MongoDB connection:', error);
+//   }
+// });
 
 // Require Model    
 const Message = require('./models/msgSchema');
@@ -29,7 +56,9 @@ const Message = require('./models/msgSchema');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors());
+
+
+// app.use(cors());
 // app.use(cors(
 //   {
 //       origin: ["https://deploy-mern-frontend.vercel.app"],
@@ -135,8 +164,8 @@ app.post('/api/donateEase', async (req, res) => {
     form.expiresAt = req.body.expiresAt;
     form.raised = req.body.raised;
     form.donator = req.body.donator;
-    
-  
+
+
 
     const doc = await form.save();
     console.log(doc);
@@ -152,42 +181,42 @@ app.post('/api/donateEase', async (req, res) => {
 
 
 
-app.post("/checkout", (req, res) => {
-  const { number, token } = req.body;
-  console.log("AMOUNT ", number);
+// app.post("/checkout", (req, res) => {
+//   const { number, token } = req.body;
+//   console.log("AMOUNT ", number);
 
-  const idempontencyKey = uuidv4();
+//   const idempontencyKey = uuidv4();
 
-  
- stripe.checkout.sessions.create({
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'https://localhost:3000/cancel',
-    payment_method_types: ['card'],
-    mode:'payment',
-  
-  })
 
-  return stripe.customers
-    .create({
-      email: token.email,
-      source: token.id
-    })
-    .then(customer => {
-      stripe.charges.create(
-        {
-          amount: number * 100,
-          currency: "usd",
-          customer: customer.id,
-          receipt_email: token.email,
-          
-        },
-        { idempontencyKey }
-      );
-    })
-    .then(result => res.status(200).json(result))
-    .catch(err => console.log(err));
-    
-});
+//  stripe.checkout.sessions.create({
+//     success_url: 'http://localhost:3000/success',
+//     cancel_url: 'https://localhost:3000/cancel',
+//     payment_method_types: ['card'],
+//     mode:'payment',
+
+//   })
+
+//   return stripe.customers
+//     .create({
+//       email: token.email,
+//       source: token.id
+//     })
+//     .then(customer => {
+//       stripe.charges.create(
+//         {
+//           amount: number * 100,
+//           currency: "usd",
+//           customer: customer.id,
+//           receipt_email: token.email,
+
+//         },
+//         { idempontencyKey }
+//       );
+//     })
+//     .then(result => res.status(200).json(result))
+//     .catch(err => console.log(err));
+
+// });
 
 // app.post("/api/fundraisers", async (req, res) => {
 //   try {
@@ -224,8 +253,8 @@ app.get('/get-form-count', async (req, res) => {
 app.get('/getForms', async (req, res) => {
   // Your logic to fetch forms from MongoDB
   await Form.find()
-  .then(forms => res.json(forms) )
-  .catch(err => res.json(err))
+    .then(forms => res.json(forms))
+    .catch(err => res.json(err))
 });
 
 app.get('/getForms/:formId', async (req, res) => {
@@ -243,7 +272,7 @@ app.get('/getForms/:formId', async (req, res) => {
 });
 
 
-  
+
 
 
 
@@ -273,7 +302,7 @@ app.post('/message', async (req, res) => {
   }
 })
 
-// Run Server 
+// Run Server
 app.listen(port, () => {
   console.log("Server is Listening")
 })
