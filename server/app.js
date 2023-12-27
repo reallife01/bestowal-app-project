@@ -67,6 +67,14 @@ app.use(cookieParser());
 //   }
 // ));
 
+// app.use(cors(
+//     {
+//         origin: ["https://deploy-mern-frontend.vercel.app"],
+//         methods: ["POST", "GET"],
+//         credentials: true
+//     }
+// ));
+
 
 
 app.get('/', (req, res) => {
