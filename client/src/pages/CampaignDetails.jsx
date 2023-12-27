@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { FaEthereum } from 'react-icons/fa'
 
 import { useStateContext } from '../context';
