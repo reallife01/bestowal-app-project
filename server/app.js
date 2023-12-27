@@ -25,27 +25,6 @@ const app = express();
 // const { MongoClient } = require('mongodb'); // Add this import
 const port = process.env.PORT;
 
-// const CONNECTION_STRING = process.env.CONNECTION_STRING;
-// const DATABASE_NAME = process.env.DATABASENAME;
-
-// let database;
-
-// app.listen(port, () => {
-//   try {
-//     console.log("Attempting to connect to MongoDB with connection string:", CONNECTION_STRING);
-//     MongoClient.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
-//       if (error) {
-//         console.error('Error connecting to MongoDB:', error);
-//         return;
-//       }
-//       database = client.db(DATABASE_NAME);
-//       console.log("Server is Listening");
-//       console.log("Mongo DB connection established");
-//     });
-//   } catch (error) {
-//     console.error('Error during MongoDB connection:', error);
-//   }
-// });
 
 // Require Model    
 const Message = require('./models/msgSchema');
@@ -81,11 +60,6 @@ app.get('/', (req, res) => {
   res.send("Hello World");
 })
 
-// app.get("/config", (req, res) => {
-//   res.send({
-//     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-//   });
-// });
 
 const donationSchema = new mongoose.Schema({
   formId: String,
@@ -189,59 +163,7 @@ app.post('/api/donateEase', async (req, res) => {
 
 
 
-// app.post("/checkout", (req, res) => {
-//   const { number, token } = req.body;
-//   console.log("AMOUNT ", number);
 
-//   const idempontencyKey = uuidv4();
-
-
-//  stripe.checkout.sessions.create({
-//     success_url: 'http://localhost:3000/success',
-//     cancel_url: 'https://localhost:3000/cancel',
-//     payment_method_types: ['card'],
-//     mode:'payment',
-
-//   })
-
-//   return stripe.customers
-//     .create({
-//       email: token.email,
-//       source: token.id
-//     })
-//     .then(customer => {
-//       stripe.charges.create(
-//         {
-//           amount: number * 100,
-//           currency: "usd",
-//           customer: customer.id,
-//           receipt_email: token.email,
-
-//         },
-//         { idempontencyKey }
-//       );
-//     })
-//     .then(result => res.status(200).json(result))
-//     .catch(err => console.log(err));
-
-// });
-
-// app.post("/api/fundraisers", async (req, res) => {
-//   try {
-//     const formData = req.body;
-
-//     // Create a new instance of the Fundraiser model with the form data
-//     const fundraiser = new Fundraiser(formData);
-
-//     // Save the fundraiser data to the database
-//     await fundraiser.save();
-
-//     res.status(200).json({ message: "Fundraiser data saved successfully." });
-//   } catch (error) {
-//     console.error("Error saving fundraiser:", error);
-//     res.status(500).json({ error: "An error occurred while saving the fundraiser data." });
-//   }
-// });
 
 
 app.get('/get-form-count', async (req, res) => {
