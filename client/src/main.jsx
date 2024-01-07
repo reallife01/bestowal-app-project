@@ -8,7 +8,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import { StateContextProvider } from './context';
 import App from './App';
 import './index.css';
-import './app.css'
+import './app.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

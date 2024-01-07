@@ -3,8 +3,12 @@ const dotenv = require('dotenv');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
-const dbUri = process.env.DATABASE || 'mongodb+srv://lateefaminu205:Asus99137@cluster0.aotk9gk.mongodb.net/?retryWrites=true&w=majority';
+// Configure ENV File & Require Connection File
+dotenv.config({ path: './.env' });
+
+const dbUri = process.env.MONGO;
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
@@ -18,8 +22,7 @@ mongoose.connect(dbUri, {
 
 
 
-// Configure ENV File & Require Connection File
-dotenv.config({ path: './.env' });
+
 
 const app = express();
 // const { MongoClient } = require('mongodb'); // Add this import
@@ -32,6 +35,7 @@ const Message = require('./models/msgSchema');
 
 
 // These Method is Used to Get Data and Cookies from FrontEnd
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
